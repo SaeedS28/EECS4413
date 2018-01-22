@@ -20,11 +20,12 @@
 	<TABLE>
 		<TR>
 			<TD><label for="interest">Annual Interest Rate</label></TD>
-			<td> <input id='interest' name='interest' type="text" step="0.01" value ="4"/></td>
+			<td><input id= 'interest' name='interest' type="number" step="0.01" value ="4"/></td>
+			
 		</TR>
 		<TR>
 			<TD><label for="period">Period</label></TD>
-			<td> <input id='period' name='period' type="number" step="1" value="6"/></td>
+			<td><input id='period' name='period' type="number" step="1" value="6"/></td>
 		</TR>
 		<TR>
 			<TD><label for="principal">Principal</label></TD>
