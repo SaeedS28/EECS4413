@@ -9,9 +9,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-<link rel="stylesheet" href="res/mc.css" type="text/css"/>
-<title>Student Loan Calculator</title>
+	<link rel="stylesheet" href="res/mc.css" type="text/css"/>
+	<title>Student Loan Calculator</title>
 </head>
+
 <body>
 	<FORM action="Start" method="GET">
 	<legend>Student Loan Application</legend>
@@ -30,14 +31,11 @@
 			<td> <input id='principal' name='principal' type="number" value="16000"/></td>
 		</TR>
 		<TR>
-		<TD><label for="gracePeriod">Grace Period</label></TD>	
-		</TR>
-		<TR>
-			<TD><p>(Take advantage of 6 month grace period and include grace period interest with your loan balance)</p></TD>	
+		 <td> <label for="gracePeriod">Grace Period</label> <div>(Take advantage of 6 month grace period and include grace period interest with your loan balance)</div></td>	
 			<TD><input id='gracePeriod' name='gracePeriod' type="checkbox" value="checkbox"/></TD>
 		</TR>
 		<TR>
-			<TD><input id='submit' name='submit' type="submit" value="submit"/></TD>
+			<TD><input id='submit' name='Submit' type="submit" value="submit"/></TD>
 		</TR>
 		
 	</TABLE>

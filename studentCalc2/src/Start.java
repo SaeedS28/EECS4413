@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class Start
  */
-@WebServlet(urlPatterns={"/Start/*", "/StartUp","/StartUp/*"})
+@WebServlet(urlPatterns={"/Start","/Start/*", "/StartUp","/StartUp/*"})
 
 public class Start extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -53,7 +53,7 @@ public class Start extends HttpServlet {
 		double totalInterest;
 		double graceInterest=0;
 		
-		if (request.getParameter("submit")==null) {
+		if (request.getParameter("Submit")==null) {
 		   request.getRequestDispatcher(startPage).forward(request,response);//here he uses request???
 		  
 		}
