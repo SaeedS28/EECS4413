@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<jsp:root xmlns:jsp="http://java.sun.com/JSP/Page" version="2.0">
+	<jsp:directive.page contentType="text/html; charset=ISO-8859-1" 
+		pageEncoding="ISO-8859-1" session="true"/>
+	<jsp:output doctype-root-element="html"
+		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
+		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
+		omit-xml-declaration="true" />
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+<link rel="stylesheet" href="res/mc.css" type="text/css"/>
+<title>Student Loan Calculator</title>
+</head>
+<body>
+	<FORM action="Start" method="GET">
+	<legend>Student Loan Application</legend>
+	<FIELDSET>
+	<TABLE>
+		<TR>
+			<TD><label for="interest">Annual Interest Rate</label></TD>
+			<td> <input id='interest' name='interest' type="text" step="0.01" value ="4"/></td>
+		</TR>
+		<TR>
+			<TD><label for="period">Period</label></TD>
+			<td> <input id='period' name='period' type="number" step="1" value="6"/></td>
+		</TR>
+		<TR>
+			<TD><label for="principal">Principal</label></TD>
+			<td> <input id='principal' name='principal' type="number" value="16000"/></td>
+		</TR>
+		<TR>
+		<TD><label for="gracePeriod">Grace Period</label></TD>	
+		</TR>
+		<TR>
+			<TD><p>(Take advantage of 6 month grace period and include grace period interest with your loan balance)</p></TD>	
+			<TD><input id='gracePeriod' name='gracePeriod' type="checkbox" value="checkbox"/></TD>
+		</TR>
+		<TR>
+			<TD><input id='submit' name='submit' type="submit" value="submit"/></TD>
+		</TR>
+		
+	</TABLE>
+	</FIELDSET>
+	</FORM>
+
+</body>
+</html>
+</jsp:root>
