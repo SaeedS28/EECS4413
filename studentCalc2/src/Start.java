@@ -49,21 +49,17 @@ public class Start extends HttpServlet {
 		String period=request.getParameter("period");
 		String rate=request.getParameter("interest");
 	//	resOut.write("Principle: " + principle+"\tPeriod: "+period+"\tRate: "+rate+"\n");
-		double ratee;
-		double totalInterest;
+		double ratee=0;
+		double totalInterest=0;
 		double graceInterest=0;
+		double prin;
+		double per;
 		
 		if (request.getParameter("Submit")==null) {
 		   request.getRequestDispatcher(startPage).forward(request,response);//here he uses request???
-		  
 		}
 		else{
 			if(request.getParameter("gracePeriod")==null){
-//				resOut.write("The checkbox is not pressed! FUCK!!!");
-				
-				double prin;
-				double per;
-				
 				if (principle != null) {
 					prin = Double.parseDouble(principle);
 					oldPrin = prin;
@@ -86,23 +82,18 @@ public class Start extends HttpServlet {
 					per = oldPeriod;
 				}
 
-				resOut.write("Period: " + per + "<html>&emsp;</html>");
 				if (rate != null) {
 					ratee = Double.parseDouble(rate);
 				} else {
 					ratee = Double.parseDouble(this.getServletContext().getInitParameter("interest"));
 				}
-				 totalInterest = ratee
-						+ Double.parseDouble(this.getServletContext().getInitParameter("fixedInterest"));
+//				totalInterest = ratee + Double.parseDouble(this.getServletContext().getInitParameter("fixedInterest"));
 
-				totalPrincipal = ((0.01 * totalInterest) / 12) * prin
-						/ (1 - Math.pow(1 + ((0.01 * totalInterest) / 12), (-1) * per));
+				totalPrincipal = ((0.01 * ratee) / 12) * prin
+						/ (1 - Math.pow(1 + ((0.01 * ratee) / 12), (-1) * per));
 
 			}
 			else{
-	//			resOut.write("The checkbox is pressed! FUCK!!!");
-				double prin;
-				double per;
 				if (principle != null) {
 					prin = Double.parseDouble(principle);
 					oldPrin = prin;
@@ -127,7 +118,6 @@ public class Start extends HttpServlet {
 				
 				double gracePeriod = Double.parseDouble(this.getServletContext().getInitParameter("gracePeriod"));
 				
-				resOut.write("Period: " + per + "<html>&emsp;</html>");
 				if (rate != null) {
 					ratee = Double.parseDouble(rate);
 				} else {
@@ -140,9 +130,8 @@ public class Start extends HttpServlet {
 				double monthlyPayments = ((0.01 * totalInterest) / 12) * prin
 						/ (1 - Math.pow(1 + ((0.01 * totalInterest) / 12), (-1) * per));
 
-				// df.setRoundingMode(RoundingMode.CEILING);
-
-				graceInterest =prin+((totalInterest)/12)*gracePeriod;
+				
+				graceInterest =prin*((totalInterest*0.01)/12)*gracePeriod;
 				
 				totalPrincipal= monthlyPayments+(graceInterest/gracePeriod);
 			}
