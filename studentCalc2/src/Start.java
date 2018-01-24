@@ -89,8 +89,8 @@ public class Start extends HttpServlet {
 				}
 //				totalInterest = ratee + Double.parseDouble(this.getServletContext().getInitParameter("fixedInterest"));
 
-				totalPrincipal = ((0.01 * ratee) / 12) * prin
-						/ (1 - Math.pow(1 + ((0.01 * ratee) / 12), (-1) * per));
+				totalPrincipal = ((0.01 * ratee) / 12) *
+						prin/ (1 - Math.pow(1 + ((0.01 * ratee) / 12), (-1) * per));
 
 			}
 			else{

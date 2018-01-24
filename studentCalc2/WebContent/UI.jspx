@@ -19,18 +19,18 @@
 	<FIELDSET>
 	<TABLE>
 		<TR>
-			<TD><label for="interest">Annual Interest Rate</label></TD>
-			<td><input id= 'interest' name='interest' type="number" step="0.01" value ="4"/></td>
-			
-		</TR>
-		<TR>
-			<TD><label for="period">Period</label></TD>
-			<td><input id='period' name='period' type="number" step="1" value="6"/></td>
-		</TR>
-		<TR>
-			<TD><label for="principal">Principal</label></TD>
+			<TD><label for="principal">Principal<div>total loan amount after studies)</div></label></TD>
 			<td> <input id='principal' name='principal' type="number" value="16000"/></td>
 		</TR>
+		<TR>
+			<TD><label for="interest">Annual Interest Rate</label></TD>
+			<td><input id= 'interest' name='interest' type="number" step="0.01" value ="4"/></td>
+		</TR>
+		<TR>
+			<TD><label for="period">Period<div>(total number of months)</div></label></TD>
+			<td><input id='period' name='period' type="number" step="1" value="6"/></td>
+		</TR>
+		
 		<TR>
 		 <td> <label for="gracePeriod">Grace Period</label> <div>(Take advantage of 6 month grace period and include grace period interest with your loan balance)</div></td>	
 			<TD><input id='gracePeriod' name='gracePeriod' type="checkbox" value="checkbox"/></TD>

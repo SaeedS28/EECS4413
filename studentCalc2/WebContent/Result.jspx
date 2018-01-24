@@ -18,11 +18,11 @@
 	<TABLE>
 		<TR >
 			<TD>Grace Period Interest:</TD>
-			<td>${requestScope['interest']}</td>
+			<td>$${requestScope['interest']}</td>
 		</TR>
 		<TR>
 			<TD>Monthly Payments:</TD>
-			<td>${requestScope['principal']}</td>
+			<td>$${requestScope['principal']}</td>
 		</TR>
 		<TR>
 			<TD><input id='reset' type="submit" value="Restart"/></TD>
