@@ -17,7 +17,7 @@ public class Loan {
 		return mp;
 	}
 	
-	public double computeGraceInterest(double principal, double period, double interest, double graceInterest, double gracePeriod, double fixedInterest, boolean grace) throws Exception {
+	public double computeGraceInterest(double principal, double gracePeriod, double interest, double fixedInterest, boolean grace) throws Exception {
 		
 		double graceInterestCalc;
 		double totalInterest = interest+fixedInterest;
@@ -29,7 +29,5 @@ public class Loan {
 		}
 
 		return graceInterestCalc;
-
 	}
-
 }

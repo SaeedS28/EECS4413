@@ -27,7 +27,7 @@ xmlns:f="http://java.sun.com/jsp/jstl/fmt"  version="2.0">
 			<td><f:formatNumber type="currency">${principal}</f:formatNumber></td>
 		</TR>
 		<TR>
-			<TD><input id='reset' type="submit" value="Recompute"/></TD>
+			<TD><input id='reset' type="submit" name="restart" value="Recompute"/></TD>
 		</TR>
 	</TABLE>
 	</FIELDSET>

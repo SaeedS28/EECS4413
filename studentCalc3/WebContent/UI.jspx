@@ -17,6 +17,7 @@
 	<FORM action="Start" method="GET">
 	<legend>${initParam['legend']}</legend>
 	<FIELDSET>
+	<font color="red">${errorMessage}</font>
 	<TABLE>
 		<TR>
 			<TD><label for="principal">Principal<div>total loan amount after studies)</div></label></TD>
