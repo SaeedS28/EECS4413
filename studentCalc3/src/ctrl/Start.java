@@ -1,6 +1,5 @@
-//43 Wellesley road 
-//March 2nd
-//1 pm, 4th floor
+package ctrl;
+
 
 import java.io.IOException;
 import java.io.Writer;
@@ -12,7 +11,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import model.Loan;
 /**
  * Servlet implementation class Start
  */
