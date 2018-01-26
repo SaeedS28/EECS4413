@@ -142,8 +142,8 @@ public class Start extends HttpServlet {
 			}
 			DecimalFormat df = new DecimalFormat("#.####");
 			df.setMaximumFractionDigits(2);
-			request.setAttribute(PRINCIPAL,df.format(totalPrincipal));
-			request.setAttribute(INTEREST_RATE,df.format(graceInterest));
+			request.setAttribute(PRINCIPAL,totalPrincipal);
+			request.setAttribute(INTEREST_RATE,graceInterest);
 			request.getRequestDispatcher(resultPage).forward(request,response);
 		//	request.getRequestDispatcher(resultPage).forward(request,response);
 		}

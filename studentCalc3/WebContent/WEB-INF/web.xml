@@ -42,4 +42,8 @@
     <param-name>gracePeriod</param-name>
     <param-value>6</param-value>
   </context-param>
+  <context-param>
+    <param-name>legend</param-name>
+    <param-value>Student Calculator</param-value>
+  </context-param>
 </web-app>
