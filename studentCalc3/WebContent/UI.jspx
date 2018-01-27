@@ -15,7 +15,7 @@
 
 <body>
 	<FORM action="Start" method="GET">
-	<legend>Student Loan Application</legend>
+	<legend>${initParam['legend']}</legend>
 	<FIELDSET>
 	<TABLE>
 	 	<tr>

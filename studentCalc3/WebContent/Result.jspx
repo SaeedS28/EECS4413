@@ -15,7 +15,7 @@ xmlns:f="http://java.sun.com/jsp/jstl/fmt"  version="2.0">
 </head>
 <body>
 	<FORM action="/studentCalc3/Start" method="GET">
-	<legend>Student Loan Application</legend>
+	<legend>${initParam['legend']}</legend>
 	<FIELDSET>
 	<TABLE>
 		<TR >
