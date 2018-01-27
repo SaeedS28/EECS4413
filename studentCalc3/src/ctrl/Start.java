@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Loan;
 
 /**
  * Servlet implementation class Start
@@ -23,13 +24,26 @@ public class Start extends HttpServlet {
 	private Double oldPeriod=null;
 	
 	private static final String PRINCIPAL = "principal";
-    private static final String INTEREST_RATE = "interest";
-//    private static final String PERIOD_FORM = "period";
-    private static final String  TOTAL_VALUE = "totalvalue";
+    private static final String INTEREST= "interest";
+    private static final String PERIOD = "period";
+    private static final String GRACE_INTEREST = "graceInterest";
+    private static final String MONTHLY_PAYMENT = "monthlyPayment";
+    private static final String ERRROR_MESSAGE = "errorMessage";
+    
+    private String errorMessage = "";
+    private boolean errorOccured=false;
+    private boolean firstTime=true;
     private Double totalPrincipal;
-	String startPage="/UI.jspx";
+    private double graceInterest;
+	
+    String startPage="/UI.jspx";
 	String resultPage="/Result.jspx";
-       
+    
+	private Loan loan;
+	private String principal;
+	private String interest;
+	private String period;
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -38,6 +52,34 @@ public class Start extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
 
+    public void init() throws ServletException {
+		loan = new Loan();
+	}
+    
+    private void displayError() {
+    	this.getServletContext().setAttribute(ERRROR_MESSAGE, errorMessage);
+    }
+    
+    private void updateValues(HttpServletRequest request) {
+    	this.getServletContext().setAttribute(INTEREST, interest);
+		this.getServletContext().setAttribute(PERIOD, period);
+		this.getServletContext().setAttribute(PRINCIPAL, principal);
+		this.getServletContext().setAttribute(MONTHLY_PAYMENT, totalPrincipal);
+		this.getServletContext().setAttribute(GRACE_INTEREST, graceInterest);
+    }
+    
+    private boolean graceCheckedOff(HttpServletRequest request) {
+    	String g= request.getParameter("gracePeriod");
+    	boolean graceCheck;
+    	
+    	if(g==null) {
+    		graceCheck=false;
+    	} else {
+    		graceCheck=true;
+    	}
+    	return graceCheck;
+    }
+    
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -141,13 +183,50 @@ public class Start extends HttpServlet {
 			DecimalFormat df = new DecimalFormat("#.####");
 			df.setMaximumFractionDigits(2);
 			request.setAttribute(PRINCIPAL,df.format(totalPrincipal));
-			request.setAttribute(INTEREST_RATE,df.format(graceInterest));
+			request.setAttribute(INTEREST,df.format(graceInterest));
 			request.getRequestDispatcher(resultPage).forward(request,response);
 		//	request.getRequestDispatcher(resultPage).forward(request,response);
 		}
 		
 	}
+	
+	private boolean checkInput(String dPrincipal, String dInterest, String dPeriod) {
+		if (dPrincipal == null || dInterest == null || dPeriod == null) {
+			return true;
+		} else {
+			try {
+				Double.parseDouble(dPrincipal);
+				Double.parseDouble(dPeriod);
+				Double.parseDouble(dInterest);
+			} catch (Exception e) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	private void checkDispatch(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+		String target = startPage;
+		String submitParameter = request.getParameter("Submit");
+		String restartParameter = request.getParameter("restart");
 
+		if (restartParameter != null && restartParameter.equals("Recompute")) {
+			firstTime = true;
+			errorMessage = "";
+			displayError();
+		} else if (submitParameter != null && submitParameter.equals("true")) {
+			if (!errorOccured) {
+				target = resultPage;
+			}
+		}
+		try {
+			request.getRequestDispatcher(target).forward(request, response);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
