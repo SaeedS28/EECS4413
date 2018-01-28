@@ -84,112 +84,19 @@ public class Start extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		Writer resOut = response.getWriter();//this is fine
-
-		//double principal=Double.parseDouble(this.getServletContext().getInitParameter("principle"));
-		String principle=request.getParameter("principal");
-		String period=request.getParameter("period");
-		String rate=request.getParameter("interest");
-	//	resOut.write("Principle: " + principle+"\tPeriod: "+period+"\tRate: "+rate+"\n");
-		double ratee=0;
-		double totalInterest=0;
-		double graceInterest=0;
-		double prin;
-		double per;
-		
-		if (request.getParameter("Submit")==null) {
-		   request.getRequestDispatcher(startPage).forward(request,response);//here he uses request???
-		}
-		else{
-			if(request.getParameter("gracePeriod")==null){
-				if (principle != null) {
-					prin = Double.parseDouble(principle);
-					oldPrin = prin;
-					counter1 = 1;
-				} else if (counter1 == 0) {
-					prin = Double.parseDouble(this.getServletContext().getInitParameter("principal"));
-					oldPrin = prin;
-					// counter1=0;
-				} else {
-					prin = oldPrin;
-				}
-				if (period != null) {
-					per = Double.parseDouble(period);
-					oldPeriod = per;
-					counter2 = 1;
-				} else if (counter2 == 0) {
-					per = Double.parseDouble(this.getServletContext().getInitParameter("period"));
-					oldPeriod = per;
-				} else {
-					per = oldPeriod;
-				}
-
-				if (rate != null) {
-					ratee = Double.parseDouble(rate);
-				} else {
-					ratee = Double.parseDouble(this.getServletContext().getInitParameter("interest"));
-				}
-//				totalInterest = ratee + Double.parseDouble(this.getServletContext().getInitParameter("fixedInterest"));
-				totalInterest = ratee
-						+ Double.parseDouble(this.getServletContext().getInitParameter("fixedInterest"));
-				
-				totalPrincipal = ((0.01 * totalInterest) / 12) *
-						prin/ (1 - Math.pow(1 + ((0.01 * totalInterest) / 12), (-1) * per));
-
-			}
-			else{
-				if (principle != null) {
-					prin = Double.parseDouble(principle);
-					oldPrin = prin;
-					counter1 = 1;
-				} else if (counter1 == 0) {
-					prin = Double.parseDouble(this.getServletContext().getInitParameter("principal"));
-					oldPrin = prin;
-					// counter1=0;
-				} else {
-					prin = oldPrin;
-				}
-				if (period != null) {
-					per = Double.parseDouble(period);
-					oldPeriod = per;
-					counter2 = 1;
-				} else if (counter2 == 0) {
-					per = Double.parseDouble(this.getServletContext().getInitParameter("period"));
-					oldPeriod = per;
-				} else {
-					per = oldPeriod;
-				}
-				
-				double gracePeriod = Double.parseDouble(this.getServletContext().getInitParameter("gracePeriod"));
-				
-				if (rate != null) {
-					ratee = Double.parseDouble(rate);
-				} else {
-					ratee = Double.parseDouble(this.getServletContext().getInitParameter("interest"));
-				}
-				totalInterest = ratee
-						+ Double.parseDouble(this.getServletContext().getInitParameter("fixedInterest"));
-				
-				
-				double monthlyPayments = ((0.01 * totalInterest) / 12) * prin
-						/ (1 - Math.pow(1 + ((0.01 * totalInterest) / 12), (-1) * per));
-
-				
-				graceInterest =prin*((totalInterest*0.01)/12)*gracePeriod;
-				
-				totalPrincipal= monthlyPayments+(graceInterest/gracePeriod);
-			}
-			DecimalFormat df = new DecimalFormat("#.####");
-			df.setMaximumFractionDigits(2);
-			request.setAttribute(PRINCIPAL,df.format(totalPrincipal));
-			request.setAttribute(INTEREST,df.format(graceInterest));
-			request.getRequestDispatcher(resultPage).forward(request,response);
-		//	request.getRequestDispatcher(resultPage).forward(request,response);
-		}
+		paymentCalc(request);
+		updateValues(request);
+		checkDispatch(request, response);
+		firstTime=true;
 	}
+//			DecimalFormat df = new DecimalFormat("#.####");
+//			df.setMaximumFractionDigits(2);
+//			request.setAttribute(PRINCIPAL,df.format(totalPrincipal));
+//			request.setAttribute(INTEREST,df.format(graceInterest));
+//			request.getRequestDispatcher(resultPage).forward(request,response);
+//		//	request.getRequestDispatcher(resultPage).forward(request,response);
 	
-	private void paymentCalc(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+	private void paymentCalc(HttpServletRequest request) throws ServletException, IOException{
 
 		String principalInput = request.getParameter("principal");
 		String periodInput = request.getParameter("period");
@@ -249,7 +156,7 @@ public class Start extends HttpServlet {
 			firstTime = true;
 			errorMessage = "";
 			displayError();
-		} else if (submitParameter != null && submitParameter.equals("true")) {
+		} else if (submitParameter != null && submitParameter.equals("submit")) {
 			if (!errorOccured) {
 				target = resultPage;
 			}
