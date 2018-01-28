@@ -24,6 +24,11 @@ public class Loan {
 		} else {
 			graceInterest=0;
 		}
+		
+		if (principal < 0 || gracePeriod < 0 || interest < 0) {
+			throw new Exception();
+
+		}
 		return graceInterest;
 	}
 

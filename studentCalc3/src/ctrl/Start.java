@@ -61,6 +61,8 @@ public class Start extends HttpServlet {
     }
     
     private void updateValues(HttpServletRequest request) {
+    	
+		
     	this.getServletContext().setAttribute(INTEREST, interest);
 		this.getServletContext().setAttribute(PERIOD, period);
 		this.getServletContext().setAttribute(PRINCIPAL, principal);
@@ -84,29 +86,28 @@ public class Start extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		paymentCalc(request);
+		paymentCalc(request, response);
 		updateValues(request);
 		checkDispatch(request, response);
 		firstTime=true;
 	}
-//			DecimalFormat df = new DecimalFormat("#.####");
-//			df.setMaximumFractionDigits(2);
 //			request.setAttribute(PRINCIPAL,df.format(totalPrincipal));
 //			request.setAttribute(INTEREST,df.format(graceInterest));
 //			request.getRequestDispatcher(resultPage).forward(request,response);
 //		//	request.getRequestDispatcher(resultPage).forward(request,response);
 	
-	private void paymentCalc(HttpServletRequest request) throws ServletException, IOException{
+	private void paymentCalc(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
 		String principalInput = request.getParameter("principal");
 		String periodInput = request.getParameter("period");
 		String interestInput = request.getParameter("interest");		
 
-		Double totalPrincipalVal=0.0;
+		double totalPrincipalVal = 0.0;
 		double totalInterest = 0.0;
 		double fixedInterest = 0.0;
-
+		int n=0;
 		if(!checkInput(principalInput, interestInput, periodInput)) {
+			errorOccured=false;
 			principal = Double.parseDouble(principalInput);
 			period = Double.parseDouble(periodInput);
 			interest= Double.parseDouble(interestInput);
@@ -116,19 +117,21 @@ public class Start extends HttpServlet {
 
 			try{
 				graceInterest = loan.computeGraceInterest(principal, period, interest, fixedInterest1, graceCheckedOff(request));
-				totalPrincipal = loan.computePayment(principal, period, interest, fixedInterest1, graceCheckedOff(request), fixedInterest1, gracePeriod);
+				totalPrincipal = loan.computePayment(principal, period, interest+fixedInterest1, fixedInterest1, graceCheckedOff(request), fixedInterest1, gracePeriod);
 			}
 			catch(Exception e){
 				errorOccured= true;
-				errorMessage= " Invalid arguments";
+				errorMessage= "One or more of the arguments provided is less than 0, faggot!";
 				displayError();
+				//errorOccured=false;
 			}
 		}
 		else if(!firstTime) {
-			errorMessage = "This Has already been done";
+			errorMessage = "What the fuck";
 			errorOccured = true;
 			displayError();
 		}
+		
 	}
 		
 	
