@@ -40,9 +40,9 @@ public class Start extends HttpServlet {
 	String resultPage="/Result.jspx";
     
 	private Loan loan;
-	private String principal;
-	private String interest;
-	private String period;
+	private double principal;
+	private double interest;
+	private double period;
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -187,8 +187,43 @@ public class Start extends HttpServlet {
 			request.getRequestDispatcher(resultPage).forward(request,response);
 		//	request.getRequestDispatcher(resultPage).forward(request,response);
 		}
-		
 	}
+	
+	private void paymentCalc(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
+		String principalInput = request.getParameter("principal");
+		String periodInput = request.getParameter("period");
+		String interestInput = request.getParameter("interest");		
+
+		Double totalPrincipalVal=0.0;
+		double totalInterest = 0.0;
+		double fixedInterest = 0.0;
+
+		if(!checkInput(principalInput, interestInput, periodInput)) {
+			principal = Double.parseDouble(principalInput);
+			period = Double.parseDouble(periodInput);
+			interest= Double.parseDouble(interestInput);
+			
+			double  fixedInterest1 = Double.parseDouble(this.getServletContext().getInitParameter("fixedInterest"));
+			double gracePeriod = Double.parseDouble(this.getServletContext().getInitParameter("gracePeriod"));
+
+			try{
+				graceInterest = loan.computeGraceInterest(principal, period, interest, fixedInterest1, graceCheckedOff(request));
+				totalPrincipal = loan.computePayment(principal, period, interest, fixedInterest1, graceCheckedOff(request), fixedInterest1, gracePeriod);
+			}
+			catch(Exception e){
+				errorOccured= true;
+				errorMessage= " Invalid arguments";
+				displayError();
+			}
+		}
+		else if(!firstTime) {
+			errorMessage = "This Has already been done";
+			errorOccured = true;
+			displayError();
+		}
+	}
+		
 	
 	private boolean checkInput(String dPrincipal, String dInterest, String dPeriod) {
 		if (dPrincipal == null || dInterest == null || dPeriod == null) {
