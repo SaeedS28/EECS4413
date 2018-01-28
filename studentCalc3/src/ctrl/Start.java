@@ -116,8 +116,8 @@ public class Start extends HttpServlet {
 			double gracePeriod = Double.parseDouble(this.getServletContext().getInitParameter("gracePeriod"));
 
 			try{
-				graceInterest = loan.computeGraceInterest(principal, period, interest, fixedInterest1, graceCheckedOff(request));
-				totalPrincipal = loan.computePayment(principal, period, interest+fixedInterest1, fixedInterest1, graceCheckedOff(request), fixedInterest1, gracePeriod);
+				graceInterest = loan.computeGraceInterest(principal, gracePeriod, interest, fixedInterest1, graceCheckedOff(request), period);
+				totalPrincipal = loan.computePayment(principal, period, interest, fixedInterest1, graceCheckedOff(request), graceInterest, gracePeriod);
 			}
 			catch(Exception e){
 				errorOccured= true;
