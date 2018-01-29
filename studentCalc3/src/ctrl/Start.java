@@ -32,17 +32,16 @@ public class Start extends HttpServlet {
     
     private String errorMessage = "";
     private boolean errorOccured=false;
-    private boolean firstTime=true;
-    private Double totalPrincipal;
     private double graceInterest;
+    private double totalPrincipal;
 	
     String startPage="/UI.jspx";
 	String resultPage="/Result.jspx";
     
 	private Loan loan;
-	private double principal;
-	private double interest;
-	private double period;
+	private double principal=25500;
+	private double interest=1;
+	private double period=48;
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -62,12 +61,14 @@ public class Start extends HttpServlet {
     
     private void updateValues(HttpServletRequest request) {
     	
+    	DecimalFormat df = new DecimalFormat("#.####");
+		df.setMaximumFractionDigits(2);
 		
     	this.getServletContext().setAttribute(INTEREST, interest);
 		this.getServletContext().setAttribute(PERIOD, period);
 		this.getServletContext().setAttribute(PRINCIPAL, principal);
-		this.getServletContext().setAttribute(MONTHLY_PAYMENT, totalPrincipal);
-		this.getServletContext().setAttribute(GRACE_INTEREST, graceInterest);
+		this.getServletContext().setAttribute(MONTHLY_PAYMENT, df.format(totalPrincipal));
+		this.getServletContext().setAttribute(GRACE_INTEREST, df.format(graceInterest));
     }
     
     private boolean graceCheckedOff(HttpServletRequest request) {
@@ -89,12 +90,7 @@ public class Start extends HttpServlet {
 		paymentCalc(request, response);
 		updateValues(request);
 		checkDispatch(request, response);
-		firstTime=true;
 	}
-//			request.setAttribute(PRINCIPAL,df.format(totalPrincipal));
-//			request.setAttribute(INTEREST,df.format(graceInterest));
-//			request.getRequestDispatcher(resultPage).forward(request,response);
-//		//	request.getRequestDispatcher(resultPage).forward(request,response);
 	
 	private void paymentCalc(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 
@@ -102,10 +98,6 @@ public class Start extends HttpServlet {
 		String periodInput = request.getParameter("period");
 		String interestInput = request.getParameter("interest");		
 
-		double totalPrincipalVal = 0.0;
-		double totalInterest = 0.0;
-		double fixedInterest = 0.0;
-		int n=0;
 		if(!checkInput(principalInput, interestInput, periodInput)) {
 			errorOccured=false;
 			principal = Double.parseDouble(principalInput);
@@ -137,11 +129,6 @@ public class Start extends HttpServlet {
 				//errorOccured=false;
 			}
 		}
-		else if(!firstTime) {
-			errorMessage = "What the fuck";
-			errorOccured = true;
-			displayError();
-		}
 		
 	}
 		
@@ -167,7 +154,6 @@ public class Start extends HttpServlet {
 		String restartParameter = request.getParameter("restart");
 
 		if (restartParameter != null && restartParameter.equals("Recompute")) {
-			firstTime = true;
 			errorMessage = "";
 			displayError();
 		} else if (submitParameter != null && submitParameter.equals("submit")) {
