@@ -121,7 +121,18 @@ public class Start extends HttpServlet {
 			}
 			catch(Exception e){
 				errorOccured= true;
-				errorMessage= "One or more of the arguments provided is less than 0, faggot!";
+				//
+				errorMessage= "";
+				if(principal<0) {
+					errorMessage=errorMessage + "Principal value cannot be negative. \n";
+				}
+				if(period<0) {
+					errorMessage= errorMessage+ "Period value cannot be negative. \n";
+				}
+				if(interest<0) {
+					errorMessage= errorMessage+ "Interest value cannot be negative.\n ";
+				}
+				
 				displayError();
 				//errorOccured=false;
 			}
