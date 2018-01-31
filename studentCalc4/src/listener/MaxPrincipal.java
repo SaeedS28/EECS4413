@@ -11,27 +11,19 @@ import javax.servlet.annotation.WebListener;
 @WebListener
 public class MaxPrincipal implements ServletContextAttributeListener {
 
-	private double maxPrincipal;
+	private static double maxPrincipal=0;
     /**
      * Default constructor. 
      */
     public MaxPrincipal() {
-        maxPrincipal=0;
+    	
     }
 
 	/**
      * @see ServletContextAttributeListener#attributeAdded(ServletContextAttributeEvent)
      */
     public void attributeAdded(ServletContextAttributeEvent arg0)  { 
-       boolean isAdded = arg0.getName().equals("principal");
-       if(isAdded){
-    	   try{
-    		   
-    	   }
-    	   catch(Exception e){
-    		   
-    	   }
-       }
+       attributeReplaced(arg0);
     }
 
 	/**
@@ -45,10 +37,22 @@ public class MaxPrincipal implements ServletContextAttributeListener {
      * @see ServletContextAttributeListener#attributeReplaced(ServletContextAttributeEvent)
      */
     public void attributeReplaced(ServletContextAttributeEvent arg0)  { 
-         // TODO Auto-generated method stub
+    	boolean isAdded = arg0.getName().equals("principal");
+        
+        if(isAdded){
+     	   try{
+     		   double tempPrincipal = Double.parseDouble(arg0.getValue().toString());
+     		   if(tempPrincipal>maxPrincipal) {
+     			   maxPrincipal=tempPrincipal;
+     		   }
+     	   }
+     	   catch(Exception e){
+     		   
+     	   }
+        }
     }
 
-    public double getMaxValue(){
+    public static double getMaxValue(){
     	return maxPrincipal;
     }
 }

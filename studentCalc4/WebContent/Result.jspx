@@ -14,7 +14,7 @@ xmlns:f="http://java.sun.com/jsp/jstl/fmt"  version="2.0">
 <title>Result</title>
 </head>
 <body>
-	<FORM action="/studentCalc4Start" method="GET">
+	<FORM action="/studentCalc4/Start" method="GET">
 	<legend>${initParam['legend']}</legend>
 	<FIELDSET>
 	<TABLE>
