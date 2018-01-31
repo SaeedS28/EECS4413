@@ -10,11 +10,13 @@
 
 <head>
 	<link rel="stylesheet" href="res/mc.css" type="text/css"/>
+	<script type="text/javascript" src="res/mc.js">;</script>
+	
 	<title>Student Loan Calculator</title>
 </head>
 
 <body>
-	<FORM action="Start" method="GET">
+	<FORM action="Start" onsubmit="return validate();" method="GET">
 	<legend>${initParam['legend']}</legend>
 	<FIELDSET>
 	<TABLE>
