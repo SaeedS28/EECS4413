@@ -3,7 +3,7 @@ package model;
 public class Loan {
 	
 	public double computePayment(double principal,double period, double interest, 
-			double fixedInterest, boolean grace, double graceInterest,double gracePeriod) throws Exception{
+			double fixedInterest, boolean grace, double graceInterest,double gracePeriod) {
 		
 		double monthlyPayments;
 		double totalInterest = interest+ fixedInterest;
@@ -16,7 +16,7 @@ public class Loan {
 	}
 	
 	public double computeGraceInterest(double principal, double gracePeriod, double interest,
-			double fixedInterest, boolean grace, double period) throws Exception {
+			double fixedInterest, boolean grace, double period) throws IllegalArgumentException {
 		double graceInterest;
 		double totalInterest = interest+fixedInterest;
 		if(grace) {
@@ -26,7 +26,7 @@ public class Loan {
 		}
 		
 		if (principal < 0 || gracePeriod < 0 || interest < 0) {
-			throw new Exception();
+			throw new IllegalArgumentException();
 
 		}
 		return graceInterest;
