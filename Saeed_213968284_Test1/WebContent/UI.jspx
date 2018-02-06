@@ -11,59 +11,22 @@
 
 <head>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/res/mc.css" type="text/css"/>
- <!-- 	<script type="text/javascript" src="${pageContext.request.contextPath}/res/mc.js">;</script>  -->
+ 	<script type="text/javascript" src="${pageContext.request.contextPath}/res/mc.js">;</script>
 	
 	<title>Student Loan Calculator</title>
 </head>
 
 <body>
+<c:choose>
+	<c:when test="${empty fixed}">
+		EBOLA
+	</c:when>
 
-	<FORM action="Start" onsubmit="return validate();" method="GET">
-	<legend>${initParam['legend']}</legend>
-	<FIELDSET>
-	<TABLE>
-	 	<tr>
-	 		<td><font color="red">${errorMessage}</font></td>
-	 	</tr>
-		<TR>
-			<TD><label for="principal">Principal<div>total loan amount after studies)</div></label></TD>
-			<td> <input id='principal' name='principal' type="number" value="${principal}"/></td>
-		</TR>
-		<TR>
-			<c:choose>
-				<c:when test="${empty fixed}">
-				<tr>
-					<td><label for="interest">Annual Interest Rate<span id="interestError" class="error"></span></label></td>
-					<td><input type="number" id="interest" name="interest" step="0.01" value="${interest}"/></td>
-				</tr>
-				<tr>
-					<td><label for="period">Payment Period<span id="periodError" class="error"></span></label>
-						<p>(total number of months)</p>
-					</td>
-					<td><input type="number" id="period" name="period" step="1" value="${period}"/></td>
-				</tr>
-				</c:when>
-				<c:otherwise>
-				<tr>
-					<td><label>Annual Interest Rate<span id="interestError" class="error"></span></label></td>
-					<td><input type="radio" id="interest" name="interest" value="4.5" />4.5</td>
-					<td><input type="radio" id="interest" name="interest" value="5.5" />5.5</td>
-					<td><input type="radio" id="interest" name="interest" value="6.5" />6.5</td>
-				</tr>
-				</c:otherwise>
-				</c:choose>
-		</TR>
-		
-		<TR>
-		 <td> <label for="gracePeriod">Grace Period</label> <div>(Take advantage of 6 month grace period and include grace period interest with your loan balance)</div></td>	
-			<TD><input id='gracePeriod' name='gracePeriod' type="checkbox" value="checkbox"/></TD>
-		</TR>
-		<TR>
-			<TD><input id='submit' name='Submit' type="submit" value="submit"/></TD>
-		</TR>
-	</TABLE>
-	</FIELDSET>
-	</FORM>
+	<c:otherwise>
+		Dank Memes
+	</c:otherwise>
+</c:choose>
+	 	
 </body>
 </html>
 </jsp:root>

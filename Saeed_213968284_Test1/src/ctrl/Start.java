@@ -85,12 +85,14 @@ public class Start extends HttpServlet {
 		
 		if(last.toString().contains("Fixed")) {
 			ro.append("This url contains Fixed \n");
-			getServletContext().setAttribute(FIXED, "blah");
+			request.setAttribute(FIXED, "blah");
 //			ro.append(getServletContext().getAttribute(FIXED).toString());
 			System.out.println("Contains fixed");
+			System.out.println("Value contained within the FIXED variable is " + getServletContext().getAttribute(FIXED));
 		}
 		else {
 			System.out.println("doesn't contain fixed");
+			System.out.println("Value contained within the FIXED variable is " + getServletContext().getAttribute(FIXED));
 		}
 //		else{
 //			paymentCalc(request, response);		
@@ -120,49 +122,49 @@ public class Start extends HttpServlet {
 		request.getRequestDispatcher(startPage).forward(request, response);
 	}
 
-	private void paymentCalc(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		String principalInput = request.getParameter("principal");
-		String periodInput = request.getParameter("period");
-		String interestInput = request.getParameter("interest");
-
-		errorOccured = false;
-
-		double fixedInterest1 = Double.parseDouble(this.getServletContext().getInitParameter("fixedInterest"));
-		double gracePeriod = Double.parseDouble(this.getServletContext().getInitParameter("gracePeriod"));
-
-		try {
-			principal = Double.parseDouble(principalInput);
-			period = Double.parseDouble(periodInput);
-			interest = Double.parseDouble(interestInput);
-			graceInterest = loan.computeGraceInterest(principal, gracePeriod, interest, fixedInterest1,
-					graceCheckedOff(request), period);
-			totalPrincipal = loan.computePayment(principal, period, interest, fixedInterest1, graceCheckedOff(request),
-					graceInterest, gracePeriod);
-		} catch (NumberFormatException e) {
-			errorOccured = true;
-			errorMessage = "";
-			errorMessage = "You entered something that is not a number. Try again";
-			displayError();
-		} catch (IllegalArgumentException e) {
-			errorOccured = true;
-			//
-			errorMessage = "";
-			if (principal < 0) {
-				errorMessage = errorMessage + "Principal value cannot be negative. \n";
-			}
-			if (period < 0) {
-				errorMessage = errorMessage + "Period value cannot be negative. \n";
-			}
-			if (interest < 0) {
-				errorMessage = errorMessage + "Interest value cannot be negative.\n ";
-			}
-			displayError();
-		} catch (Exception e) {
-			errorOccured = true;
-		}
-	}
+//	private void paymentCalc(HttpServletRequest request, HttpServletResponse response)
+//			throws ServletException, IOException {
+//
+//		String principalInput = request.getParameter("principal");
+//		String periodInput = request.getParameter("period");
+//		String interestInput = request.getParameter("interest");
+//
+//		errorOccured = false;
+//
+//		double fixedInterest1 = Double.parseDouble(this.getServletContext().getInitParameter("fixedInterest"));
+//		double gracePeriod = Double.parseDouble(this.getServletContext().getInitParameter("gracePeriod"));
+//
+//		try {
+//			principal = Double.parseDouble(principalInput);
+//			period = Double.parseDouble(periodInput);
+//			interest = Double.parseDouble(interestInput);
+//			graceInterest = loan.computeGraceInterest(principal, gracePeriod, interest, fixedInterest1,
+//					graceCheckedOff(request), period);
+//			totalPrincipal = loan.computePayment(principal, period, interest, fixedInterest1, graceCheckedOff(request),
+//					graceInterest, gracePeriod);
+//		} catch (NumberFormatException e) {
+//			errorOccured = true;
+//			errorMessage = "";
+//			errorMessage = "You entered something that is not a number. Try again";
+//			displayError();
+//		} catch (IllegalArgumentException e) {
+//			errorOccured = true;
+//			//
+//			errorMessage = "";
+//			if (principal < 0) {
+//				errorMessage = errorMessage + "Principal value cannot be negative. \n";
+//			}
+//			if (period < 0) {
+//				errorMessage = errorMessage + "Period value cannot be negative. \n";
+//			}
+//			if (interest < 0) {
+//				errorMessage = errorMessage + "Interest value cannot be negative.\n ";
+//			}
+//			displayError();
+//		} catch (Exception e) {
+//			errorOccured = true;
+//		}
+//	}
 
 
 	/**
