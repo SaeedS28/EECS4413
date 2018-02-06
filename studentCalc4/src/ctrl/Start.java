@@ -59,17 +59,6 @@ public class Start extends HttpServlet {
 		this.getServletContext().setAttribute(ERRROR_MESSAGE, errorMessage);
 	}
 
-	private void updateValues(HttpServletRequest request) {
-
-//		DecimalFormat df = new DecimalFormat("#.####");
-//		df.setMaximumFractionDigits(2);
-//
-//		this.getServletContext().setAttribute(INTEREST, interest);
-//		this.getServletContext().setAttribute(PERIOD, period);
-//		this.getServletContext().setAttribute(PRINCIPAL, principal);
-//		this.getServletContext().setAttribute(MONTHLY_PAYMENT, df.format(totalPrincipal));
-//		this.getServletContext().setAttribute(GRACE_INTEREST, df.format(graceInterest));
-	}
 
 	private boolean graceCheckedOff(HttpServletRequest request) {
 		String g = request.getParameter("gracePeriod");
@@ -90,7 +79,7 @@ public class Start extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		paymentCalc(request, response);
-		updateValues(request);
+	//	updateValues(request);
 		
 		DecimalFormat df = new DecimalFormat("#.####");
 		df.setMaximumFractionDigits(2);
