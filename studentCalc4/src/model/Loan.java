@@ -25,7 +25,7 @@ public class Loan {
 			graceInterest=0;
 		}
 		
-		if (principal < 0 || gracePeriod < 0 || interest < 0) {
+		if (principal < 0 || period< 0 || interest < 0) {
 			throw new IllegalArgumentException();
 
 		}

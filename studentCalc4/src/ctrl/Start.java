@@ -39,9 +39,9 @@ public class Start extends HttpServlet {
 	String resultPage = "/Result.jspx";
 
 	private Loan loan;
-	private double principal;
-	private double interest;
-	private double period;
+	private double principal = 25500;
+	private double interest = 1;
+	private double period = 48;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -61,14 +61,14 @@ public class Start extends HttpServlet {
 
 	private void updateValues(HttpServletRequest request) {
 
-		DecimalFormat df = new DecimalFormat("#.####");
-		df.setMaximumFractionDigits(2);
-
-		this.getServletContext().setAttribute(INTEREST, interest);
-		this.getServletContext().setAttribute(PERIOD, period);
-		this.getServletContext().setAttribute(PRINCIPAL, principal);
-		this.getServletContext().setAttribute(MONTHLY_PAYMENT, df.format(totalPrincipal));
-		this.getServletContext().setAttribute(GRACE_INTEREST, df.format(graceInterest));
+//		DecimalFormat df = new DecimalFormat("#.####");
+//		df.setMaximumFractionDigits(2);
+//
+//		this.getServletContext().setAttribute(INTEREST, interest);
+//		this.getServletContext().setAttribute(PERIOD, period);
+//		this.getServletContext().setAttribute(PRINCIPAL, principal);
+//		this.getServletContext().setAttribute(MONTHLY_PAYMENT, df.format(totalPrincipal));
+//		this.getServletContext().setAttribute(GRACE_INTEREST, df.format(graceInterest));
 	}
 
 	private boolean graceCheckedOff(HttpServletRequest request) {
@@ -91,7 +91,29 @@ public class Start extends HttpServlet {
 			throws ServletException, IOException {
 		paymentCalc(request, response);
 		updateValues(request);
-		checkDispatch(request, response);
+		
+		DecimalFormat df = new DecimalFormat("#.####");
+		df.setMaximumFractionDigits(2);
+
+		getServletContext().setAttribute(INTEREST, interest);
+		getServletContext().setAttribute(PERIOD, period);
+		getServletContext().setAttribute(PRINCIPAL, principal);
+		getServletContext().setAttribute(MONTHLY_PAYMENT, df.format(totalPrincipal));
+		getServletContext().setAttribute(GRACE_INTEREST, df.format(graceInterest));
+		
+		String dispatchURL = startPage;
+		String submit = request.getParameter("Submit");
+		String restart = request.getParameter("restart");
+
+		if (restart != null && restart.equals("Recompute")) {
+			errorMessage = "";
+			displayError();
+		} else if (submit != null && submit.equals("submit")) {
+			if (!errorOccured) {
+				dispatchURL = resultPage;
+			}
+		}
+		request.getRequestDispatcher(dispatchURL).forward(request, response);
 	}
 
 	private void paymentCalc(HttpServletRequest request, HttpServletResponse response)
@@ -138,26 +160,6 @@ public class Start extends HttpServlet {
 		}
 	}
 
-	private void checkDispatch(HttpServletRequest request, HttpServletResponse response) throws ServletException {
-		String target = startPage;
-		String submitParameter = request.getParameter("Submit");
-		String restartParameter = request.getParameter("restart");
-
-		if (restartParameter != null && restartParameter.equals("Recompute")) {
-			errorMessage = "";
-			displayError();
-		} else if (submitParameter != null && submitParameter.equals("submit")) {
-			if (!errorOccured) {
-				target = resultPage;
-			}
-		}
-		try {
-			request.getRequestDispatcher(target).forward(request, response);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
