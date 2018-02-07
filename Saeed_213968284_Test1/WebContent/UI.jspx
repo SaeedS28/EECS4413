@@ -24,7 +24,7 @@
 <body>
 <c:choose>
     <c:when test = "${empty fixed}">
-    <FORM action="Start" onsubmit="return validate();" method="GET">
+    <FORM action="" onsubmit="return validate();" method="GET">
     <legend>${initParam['legend']}</legend>
     <FIELDSET>
     <TABLE>
@@ -45,7 +45,7 @@
         </TR>
         
         <TR>
-         <td> <label for="gracePeriod">Grace Period</label> <div>(Take advantage of 6 month grace period and include grace period interest with your loan balance)</div></td>    
+         	<td><label for="gracePeriod">Grace Period</label> <div>(Take advantage of 6 month grace period and include grace period interest with your loan balance)</div></td>    
             <TD><input id='gracePeriod' name='gracePeriod' type="checkbox" value="checkbox"/></TD>
         </TR>
         <TR>
@@ -74,7 +74,6 @@
 			<td><input type="radio" id="interest" name="interest" value="5.5" />5.5</td>
 			<td><input type="radio" id="interest" name="interest" value="6.5" />6.5</td>
         </TR>
-
         <TR>
             <TD><input id='submit' name='Submit' type="submit" value="submit"/></TD>
         </TR>
