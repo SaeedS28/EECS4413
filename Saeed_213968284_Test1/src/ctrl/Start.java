@@ -86,7 +86,6 @@ public class Start extends HttpServlet {
 		if(last.toString().contains("Fixed")) {
 			ro.append("This url contains Fixed \n");
 			request.setAttribute(FIXED, "blah");
-//			ro.append(getServletContext().getAttribute(FIXED).toString());
 			System.out.println("Contains fixed");
 			System.out.println("Value contained within the FIXED variable is " + getServletContext().getAttribute(FIXED));
 		}
