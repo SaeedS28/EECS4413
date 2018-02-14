@@ -24,14 +24,7 @@ form {
 	box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.3);   
 }
 
-tr, td {
-	padding: 10px;
-}
 
-label {
-	display: block;
-	margin-top: 16px;
-}
 
 .radio label, .radio input    {  
 		display: inline;   
