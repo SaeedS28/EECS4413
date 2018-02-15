@@ -1,23 +1,23 @@
 package bean;
 
 public class StudentBean {
-	private int sid;
+	private String sid;
 	private String name;
 	private int credit_taken;
 	private int credit_graduate;
 
-	public StudentBean(int sid, String name, int credits_taken, int credit_graduate){
+	public StudentBean(String sid, String name, int credits_taken, int credit_graduate){
 		this.sid=sid;
 		this.name=name;
 		this.credit_taken=credits_taken;
 		this.credit_graduate=credit_graduate;
 	}
 
-	public int getSid() {
+	public String getSid() {
 		return sid;
 	}
 
-	public void setSid(int sid) {
+	public void setSid(String sid) {
 		this.sid = sid;
 	}
 

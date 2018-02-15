@@ -4,6 +4,7 @@ public class EnrollmentBean {
 	private int cid;
 	private String students;
 	private int credit;
+	
 	public EnrollmentBean(int cid, String students, int credit)	{
 		this.cid = cid;
 		this.students = students;
