@@ -1,21 +1,21 @@
 package bean;
 
 public class EnrollmentBean {
-	private int cid;
+	private String cid;
 	private String students;
 	private int credit;
 	
-	public EnrollmentBean(int cid, String students, int credit)	{
+	public EnrollmentBean(String cid, String students, int credit)	{
 		this.cid = cid;
 		this.students = students;
 		this.credit = credit;
 	}
 
-	public int getCid() {
+	public String getCid() {
 		return cid;
 	}
 
-	public void setCid(int cid) {
+	public void setCid(String cid) {
 		this.cid = cid;
 	}
 
