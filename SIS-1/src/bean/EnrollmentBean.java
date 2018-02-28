@@ -1,11 +1,13 @@
 package bean;
 
+import java.util.ArrayList;
+
 public class EnrollmentBean {
 	private String cid;
-	private String students;
+	private ArrayList<String> students;
 	private int credit;
 	
-	public EnrollmentBean(String cid, String students, int credit)	{
+	public EnrollmentBean(String cid, ArrayList<String> students, int credit)	{
 		this.cid = cid;
 		this.students = students;
 		this.credit = credit;
@@ -19,11 +21,11 @@ public class EnrollmentBean {
 		this.cid = cid;
 	}
 
-	public String getStudents() {
+	public ArrayList<String> getStudents() {
 		return students;
 	}
 
-	public void setStudents(String students) {
+	public void setStudents(ArrayList<String> students) {
 		this.students = students;
 	}
 

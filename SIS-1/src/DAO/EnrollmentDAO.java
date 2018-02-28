@@ -4,7 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.naming.InitialContext;
@@ -25,8 +27,8 @@ public class EnrollmentDAO {
 		}
 	}
 	
-	public Map<String, EnrollmentBean> retrieve(String cid, String student, int credits) throws SQLException {
-		String query= "select * from enrollment where sid like"+ student; 
+	public Map<String, EnrollmentBean> retrieve(String namePrefix, int credits) throws SQLException {
+		String query= "select * from enrollment where sid in (select sid from students where surname like '%"+ namePrefix + "%' and credit_taken <= " + credits+")"; 
 				//+ "and credit_taken >="+ credit_taken;
 		Map<String, EnrollmentBean> rv = new HashMap<String, EnrollmentBean>();
 		Connection con= this.ds.getConnection();
@@ -34,13 +36,19 @@ public class EnrollmentDAO {
 		ResultSet r= p.executeQuery();
 
 		while(r.next()){
-			String cID= r.getString("CID");
-			String sID= r.getString("SID");
-			int creds = r.getInt("CREDIT");			
-			
-			EnrollmentBean sb = new EnrollmentBean(cID,sID,creds); 
-			
-			rv.put(cID+","+sID, sb);
+			if (rv.get(r.getString("CID")) != null){
+				String sID= r.getString("SID");
+				rv.get(r.getString("CID")).getStudents().add(sID);
+			} else {
+				String cID= r.getString("CID");
+				String sID= r.getString("SID");
+				int creds = r.getInt("CREDIT");			
+				ArrayList <String> sIds = new ArrayList<String>();
+				sIds.add(sID);
+				EnrollmentBean sb = new EnrollmentBean(cID,sIds,creds); 
+				
+				rv.put(cID, sb);				
+			}		
 		}
 		r.close();
 		p.close();
