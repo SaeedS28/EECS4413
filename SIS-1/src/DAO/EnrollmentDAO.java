@@ -47,7 +47,7 @@ public class EnrollmentDAO {
 				sIds.add(sID);
 				EnrollmentBean sb = new EnrollmentBean(cID,sIds,creds); 
 				
-				rv.put(cID, sb);				
+				rv.put(cID, sb);
 			}		
 		}
 		r.close();
