@@ -7,8 +7,8 @@ import bean.*;
 
 public class SIS {
 
-	StudentDAO sd;
-	EnrollmentDAO ed;
+	private StudentDAO sd;
+	private EnrollmentDAO ed;
 
 	public SIS() throws ClassNotFoundException {
 		ed = new EnrollmentDAO();
@@ -20,7 +20,7 @@ public class SIS {
 		try{
 			creds=Integer.parseInt(credit_taken);
 		} catch(Exception e){
-			System.out.println(" you fucked up fam");
+			System.out.println("you fucked up fam");
 		}
 		return sd.retrieve(namePrefix, creds);
 	}
@@ -30,7 +30,7 @@ public class SIS {
 		try{
 			creds=Integer.parseInt(credit_taken);
 		} catch(Exception e){
-			System.out.println(" you fucked up fam");
+			System.out.println("you fucked up fam");
 		}
 		return ed.retrieve(namePrefix, creds);
 

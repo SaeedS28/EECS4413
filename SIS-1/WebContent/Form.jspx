@@ -13,21 +13,25 @@
 
 
 <head>
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/res/mc.css" type="text/css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath}/res/mc.css" type="text/css" />
+	<script type="text/javascript" src="${pageContext.request.contextPath}/res/Form.js">;</script>
 <title>Student Information System</title>
 </head>
 
 <body>
-
-	<FORM >
+	<FORM action="" method="post">
 		<FIELDSET>
 			<legend>Student Information System</legend>
 			
-			<label for="name">Name Prefix: </label> <input id='name' type="text"
-				name="name" /><label for="credits">Minimum Credit Taken: </label>
-			<input id='credits' name='credits' /> <input id='Report'
-				name='Report' type="submit" value="Report" class="reportbutton" />
+			<label for="name">Name Prefix: </label> 
+			<input id='name' type="text" name="name" />
+			
+			<label for="credits">Minimum Credit Taken: </label>
+			<input id='credits' name='credits' /> 
+			
+			<input id='Report' name='Report' type="submit" onclick="runIt(${pageContext.request.contextPath}/Start); return false;" value="Report" class="reportbutton" />
+			
+			<div id="result">temp</div>
 		</FIELDSET>
 	</FORM>
 </body>
