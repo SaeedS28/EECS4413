@@ -19,9 +19,7 @@
 <body>
 
 	<FORM action="Start" method="post">
-
 		<FIELDSET>
-
 			<legend>Student Information System</legend>
 
 			<label for="name">Name Prefix: </label> 
@@ -33,9 +31,7 @@
 			<input id='Report' name='Report' type="submit" value="Report" class="reportbutton" />
 
 			<div id="result"></div>
-
 		</FIELDSET>
-
 	</FORM>
 </body>
 </html>

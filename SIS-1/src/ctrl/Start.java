@@ -37,15 +37,20 @@ public class Start extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.getRequestDispatcher("/form.jspx").forward(request, response);
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String buttonPressed=request.getParameter("Report");
+		
+		if(buttonPressed!=null) {
+			System.out.println("Name: "+request.getParameter("name")
+			+" credits: "+request.getParameter("credits"));
+		}
 	}
 
 }
