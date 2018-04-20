@@ -1,6 +1,10 @@
 package ctrl;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.Map;
+
+import bean.StudentBean;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -46,11 +50,26 @@ public class Start extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String buttonPressed=request.getParameter("Report");
+		String name;
+		String creditsTaken;
 		
 		if(buttonPressed!=null) {
-			System.out.println("Name: "+request.getParameter("name")
-			+" credits: "+request.getParameter("credits"));
+			name=request.getParameter("name");
+			creditsTaken=request.getParameter("credits");
+			System.out.println("Name: "+ name
+					+" credits: "+creditsTaken);
+			
+			try {
+				Map<String, StudentBean> sb=mod.retriveStudent(name, creditsTaken);
+				PrintWriter pr=response.getWriter();
+				if(sb.size()==0) {
+					pr.println("No record exists, try again");
+				}
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
 		}
+		
 	}
 
 }
