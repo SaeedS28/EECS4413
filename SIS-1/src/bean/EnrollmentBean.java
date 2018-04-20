@@ -7,7 +7,7 @@ public class EnrollmentBean {
 	private ArrayList<String> students;
 	private int credit;
 	
-	public EnrollmentBean(String cid, ArrayList<String> students, int credit)	{
+	public EnrollmentBean(String cid, ArrayList<String> students, int credit) {
 		this.cid = cid;
 		this.students = students;
 		this.credit = credit;

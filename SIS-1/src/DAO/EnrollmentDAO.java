@@ -28,7 +28,8 @@ public class EnrollmentDAO {
 	}
 	
 	public Map<String, EnrollmentBean> retrieve(String namePrefix, int credits) throws SQLException {
-		String query= "select * from enrollment where sid in (select sid from students where surname like '%"+ namePrefix + "%' and credit_taken <= " + credits+")"; 
+		String query= "select * from enrollment where sid in (select sid from students "
+				+ "where surname like '%"+ namePrefix + "%' and credit_taken <= " + credits+")";  
 				//+ "and credit_taken >="+ credit_taken;
 		Map<String, EnrollmentBean> rv = new HashMap<String, EnrollmentBean>();
 		Connection con= this.ds.getConnection();
