@@ -73,14 +73,10 @@ public class Start extends HttpServlet {
 					pr.println("<th>name</th>");
 					pr.println("<th>credits taken</th>");
 					pr.println("<th>credits to graduate</th>");
-//					// pr.println("<td>credits end of term</td>");
 					pr.println("</tr>");
 //					
 					while(iter.hasNext()) {
 						StudentBean student = iter.next();
-					// String sid= student.getSid();
-						//StudentBean student = iter.next();
-//						String sid= student.getSid();
 						pr.println("<tr>");
 						pr.print(String.format("<td>%s</td>", student.getSid()));
 						pr.print(String.format("<td>%s</td>", student.getName()));
@@ -93,12 +89,6 @@ public class Start extends HttpServlet {
 						System.out.println(student.getCredit_taken());
 						System.out.println(student.getCredit_graduate());
 					}
-					
-//					// System.out.println(iter.hasNext() +"has next true?");
-//					while (iter.hasNext()) {
-//						
-//						// System.out.println(tmp1 + "= lol " + request.getParameter(tmp1));
-//					}
 					pr.println("</table>");
 //
 				}

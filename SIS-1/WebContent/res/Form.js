@@ -4,37 +4,26 @@ function validate() {
 	var name = document.getElementById("name").value;
 	var creds = document.getElementById("credits").value;
 
-	 
+	error=[];
 	
 	if (creds.trim() == "") {
-		errorMessage = "Enter a valid credit value\n";
+		error.push("Credit value cannot be empty");
 		result = false;
 	}
-	else if (isNaN(creds) || creds < 0) {
-		errorMessage = "Not a valid number. Try again!";
+	if (isNaN(creds) || creds < 0) {
+		error.push("Credit cannot be negative. Try again!");
 		result = false;
 	}
-
-	
 
 	if (name.trim() == "") {
-		errorMessage = "Enter a valid name";
+		error.push("Name cannot be left empty.");
 		result = false;
 	}
 	
-	if (!result) {
-		alert(errorMessage);
+	if (error.length>0) {
+		alert(error.join("\n"))
+		result=false;
 	}
 	
 	return result;
-}
-
-function runIt(address){
-	if(validate()){
-		getInformation(address);
-	}
-}
-
-function getInformation(address){
-	
 }
