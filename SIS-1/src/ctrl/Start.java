@@ -2,7 +2,6 @@ package ctrl;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -61,47 +60,46 @@ public class Start extends HttpServlet {
 					+" credits: "+creditsTaken);
 			
 			try {
-				Map<String, StudentBean> sb=new HashMap<String, StudentBean>();
-				sb=mod.retriveStudent(name, creditsTaken);
+				Map<String, StudentBean> sb=mod.retriveStudent(name, creditsTaken);
 				PrintWriter pr=response.getWriter();
 				if(sb.size()==0) {
 					pr.println("No record exists, try again");
 				}
 				else {
 					Iterator<StudentBean> iter = sb.values().iterator();
-					
+					pr.println("<table border='1'>");
+					pr.println("<tr>");
+					pr.println("<th>sid</th>");
+					pr.println("<th>name</th>");
+					pr.println("<th>credits taken</th>");
+					pr.println("<th>credits to graduate</th>");
+//					// pr.println("<td>credits end of term</td>");
+					pr.println("</tr>");
+//					
 					while(iter.hasNext()) {
 						StudentBean student = iter.next();
 					// String sid= student.getSid();
-						
+						//StudentBean student = iter.next();
+//						String sid= student.getSid();
+						pr.println("<tr>");
+						pr.print(String.format("<td>%s</td>", student.getSid()));
+						pr.print(String.format("<td>%s</td>", student.getName()));
+						pr.print(String.format("<td>%d</td>", student.getCredit_taken()));
+						pr.print(String.format("<td>%d</td>", student.getCredit_graduate()));
+						// pr.print(String.format("<td>%d</td>", student.g));
+						pr.println("</tr>");
 						System.out.println(student.getSid());
 						System.out.println(student.getName());
 						System.out.println(student.getCredit_taken());
 						System.out.println(student.getCredit_graduate());
 					}
 					
-//					pr.println("<table border='1'>");
-//					pr.println("<tr>");
-//					pr.println("<th>sid</th>");
-//					pr.println("<th>name</th>");
-//					pr.println("<th>credits taken</th>");
-//					pr.println("<th>credits to graduate</th>");
-//					// pr.println("<td>credits end of term</td>");
-//					pr.println("</tr>");
 //					// System.out.println(iter.hasNext() +"has next true?");
 //					while (iter.hasNext()) {
-//						StudentBean student = iter.next();
-//						// String sid= student.getSid();
-//						pr.println("<tr>");
-//						pr.print(String.format("<td>%s</td>", student.getSid()));
-//						pr.print(String.format("<td>%s</td>", student.getName()));
-//						pr.print(String.format("<td>%d</td>", student.getCredit_taken()));
-//						pr.print(String.format("<td>%d</td>", student.getCredit_graduate()));
-//						// pr.print(String.format("<td>%d</td>", student.g));
-//						pr.println("</tr>");
+//						
 //						// System.out.println(tmp1 + "= lol " + request.getParameter(tmp1));
 //					}
-//					pr.println("</table>");
+					pr.println("</table>");
 //
 				}
 			} catch(Exception e) {
