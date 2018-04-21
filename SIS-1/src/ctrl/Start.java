@@ -2,6 +2,8 @@ package ctrl;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import bean.StudentBean;
@@ -27,43 +29,80 @@ public class Start extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
     
-    public void init(){
-    	try {
-			mod=new SIS();
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletprponse prponse)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.getRequestDispatcher("/form.jspx").forward(request, response);
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		//prponse.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletprponse prponse)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String buttonPressed=request.getParameter("Report");
+		String buttonPprsed=request.getParameter("Report");
 		String name;
 		String creditsTaken;
 		
-		if(buttonPressed!=null) {
+		try {
+			mod=new SIS();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
+		if(buttonPprsed!=null) {
 			name=request.getParameter("name");
 			creditsTaken=request.getParameter("credits");
 			System.out.println("Name: "+ name
 					+" credits: "+creditsTaken);
 			
 			try {
-				Map<String, StudentBean> sb=mod.retriveStudent(name, creditsTaken);
+				Map<String, StudentBean> sb=new HashMap<String, StudentBean>();
+				sb=mod.retriveStudent(name, creditsTaken);
 				PrintWriter pr=response.getWriter();
 				if(sb.size()==0) {
 					pr.println("No record exists, try again");
+				}
+				else {
+					Iterator<StudentBean> iter = sb.values().iterator();
+					
+					while(iter.hasNext()) {
+						StudentBean student = iter.next();
+					// String sid= student.getSid();
+						
+						System.out.println(student.getSid());
+						System.out.println(student.getName());
+						System.out.println(student.getCredit_taken());
+						System.out.println(student.getCredit_graduate());
+					}
+					
+//					pr.println("<table border='1'>");
+//					pr.println("<tr>");
+//					pr.println("<th>sid</th>");
+//					pr.println("<th>name</th>");
+//					pr.println("<th>credits taken</th>");
+//					pr.println("<th>credits to graduate</th>");
+//					// pr.println("<td>credits end of term</td>");
+//					pr.println("</tr>");
+//					// System.out.println(iter.hasNext() +"has next true?");
+//					while (iter.hasNext()) {
+//						StudentBean student = iter.next();
+//						// String sid= student.getSid();
+//						pr.println("<tr>");
+//						pr.print(String.format("<td>%s</td>", student.getSid()));
+//						pr.print(String.format("<td>%s</td>", student.getName()));
+//						pr.print(String.format("<td>%d</td>", student.getCredit_taken()));
+//						pr.print(String.format("<td>%d</td>", student.getCredit_graduate()));
+//						// pr.print(String.format("<td>%d</td>", student.g));
+//						pr.println("</tr>");
+//						// System.out.println(tmp1 + "= lol " + request.getParameter(tmp1));
+//					}
+//					pr.println("</table>");
+//
 				}
 			} catch(Exception e) {
 				e.printStackTrace();

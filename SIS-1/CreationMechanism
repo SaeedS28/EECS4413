@@ -1,4 +1,3 @@
-
 CREATE  TABLE ENROLLMENT (
   cid varchar(20) not null,
   sid char (20) not null,
@@ -201,3 +200,4 @@ VALUES
 ('cse96577','Margaret','Ryan',84,90),
 
 ('cse97262','Catherine','Johnson',99,120);
+

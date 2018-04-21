@@ -21,7 +21,7 @@ public class SIS {
 			creds=Integer.parseInt(credit_taken);
 			return sd.retrieve(namePrefix, creds);
 		} catch(Exception e){
-			System.out.println("you fucked up fam");
+			e.printStackTrace();
 		}
 		return null;
 	}

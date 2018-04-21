@@ -32,7 +32,7 @@ public class StudentDAO {
 		while(r.next()){
 			String name= r.getString("GIVENNAME") + ", "+ r.getString("SURNAME");
 			String sid = r.getString("SID");
-			int creditTaken= r.getInt("CREDITS_TAKEN");
+			int creditTaken= r.getInt("CREDIT_TAKEN");
 			int creditGraduate=r.getInt("CREDIT_GRADUATE");
 			
 			
