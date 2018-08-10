@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<team>
+<Person> 
+    <sin>123</sin>
+    <name>John</name>
+    <age>20</age>
+</Person>
+<Person> 
+    <sin>124</sin>
+    <name>Jane</name>
+    <age>21</age>
+</Person>
+</team>
+

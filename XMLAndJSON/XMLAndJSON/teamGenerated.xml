@@ -1,0 +1,16 @@
+
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<team>
+    <member emplType="regular">
+        <sin>123</sin>
+        <name>John</name>
+        <age>20</age>
+        <salary>1000</salary>
+    </member>
+    <member emplType="contractor">
+        <sin>124</sin>
+        <name>Jane</name>
+        <age>20</age>
+        <salary>1000</salary>
+    </member>
+</team>
