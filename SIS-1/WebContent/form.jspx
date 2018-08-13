@@ -29,7 +29,7 @@
 			<input type="number" id='credits' name='credits' /> 
 
 			<input id='Report' name='Report' type="submit" value="Report" onclick="return validate();" class="reportbutton" />
-
+			<input id='GenerateXML' name="GenerateXML" type="submit" value="GenerateXML" class="reportbutton" />
 			<div id="result"></div>
 		</FIELDSET>
 	</FORM>

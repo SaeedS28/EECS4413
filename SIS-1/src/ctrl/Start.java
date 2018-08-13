@@ -43,8 +43,10 @@ public class Start extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String buttonPprsed=request.getParameter("Report");
+		String genXML=request.getParameter("GenerateXML");
 		String name;
 		String creditsTaken;
+		PrintWriter pr=response.getWriter();
 		
 		try {
 			mod=new SIS();
@@ -61,7 +63,7 @@ public class Start extends HttpServlet {
 			
 			try {
 				Map<String, StudentBean> sb=mod.retriveStudent(name, creditsTaken);
-				PrintWriter pr=response.getWriter();
+				
 				if(sb.size()==0) {
 					pr.println("No record exists, try again");
 				}
@@ -95,6 +97,14 @@ public class Start extends HttpServlet {
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
+		}
+		else if(genXML!=null) {
+			//pr.println("You pressed the Generate XML button");
+			String f = "export/"+request.getSession().getId()+".xml";
+			//System.out.println(f);
+			String filename = this.getServletContext().getRealPath("/"+f);
+			request.setAttribute("link", f);
+			request.getRequestDispatcher("/Done.jspx").forward(request, response);
 		}
 		
 	}

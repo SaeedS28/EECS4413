@@ -37,4 +37,7 @@ public class SIS {
 		return null;
 	}
 
+	public void export(String namePrefix, String minGPA, String filename) throws Exception{
+		
+	}
 }
