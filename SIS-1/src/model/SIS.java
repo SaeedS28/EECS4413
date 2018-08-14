@@ -50,7 +50,6 @@ public class SIS {
 		
 		try {
 			credit=Integer.parseInt(credit_taken);
-			//StudentDAO students = new StudentDAO();
 			Map<String,StudentBean> sb=sd.retrieve(namePrefix, credit);
 			ListWrapper lw=new ListWrapper(namePrefix, credit_taken, new ArrayList<StudentBean>(sb.values()));
 			

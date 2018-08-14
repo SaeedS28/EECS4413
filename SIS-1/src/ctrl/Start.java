@@ -76,7 +76,7 @@ public class Start extends HttpServlet {
 					pr.println("<th>credits taken</th>");
 					pr.println("<th>credits to graduate</th>");
 					pr.println("</tr>");
-//					
+					
 					while(iter.hasNext()) {
 						StudentBean student = iter.next();
 						pr.println("<tr>");
@@ -84,7 +84,7 @@ public class Start extends HttpServlet {
 						pr.print(String.format("<td>%s</td>", student.getName()));
 						pr.print(String.format("<td>%d</td>", student.getCredit_taken()));
 						pr.print(String.format("<td>%d</td>", student.getCredit_graduate()));
-						// pr.print(String.format("<td>%d</td>", student.g));
+						
 						pr.println("</tr>");
 						System.out.println(student.getSid());
 						System.out.println(student.getName());
@@ -100,11 +100,22 @@ public class Start extends HttpServlet {
 		}
 		else if(genXML!=null) {
 			//pr.println("You pressed the Generate XML button");
+			name=request.getParameter("name");
+			creditsTaken=request.getParameter("credits");
 			String f = "export/"+request.getSession().getId()+".xml";
 			//System.out.println(f);
 			String filename = this.getServletContext().getRealPath("/"+f);
 			request.setAttribute("link", f);
-			request.getRequestDispatcher("/Done.jspx").forward(request, response);
+			
+			try {
+				mod.export(name, creditsTaken, filename);
+				request.getRequestDispatcher("/Done.jspx").forward(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			
 		}
 		
 	}
