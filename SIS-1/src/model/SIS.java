@@ -1,12 +1,16 @@
 package model;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Map;
 
+import javax.xml.XMLConstants;
 import javax.xml.bind.JAXBContext;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 
 import com.sun.xml.internal.ws.util.Pool.Marshaller;
 
@@ -62,8 +66,10 @@ public class SIS {
 			sw.write("\n");
 			
 			//Code for SIS.xsd
+			SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+			Schema schema = sf.newSchema(new File("C:\\Users\\Saad\\Desktop\\EECS4413\\SIS-1\\WebContent\\export\\SIS.xsd"));
+			marshaller.setSchema(schema);
 			marshaller.marshal(lw, new StreamResult(sw));
-			
 			
 			System.out.println(sw.toString());
 			FileWriter fw = new FileWriter(filename);

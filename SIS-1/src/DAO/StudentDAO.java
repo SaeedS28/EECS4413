@@ -37,9 +37,9 @@ public class StudentDAO {
 			String sid = r.getString("SID");
 			int creditTaken= r.getInt("CREDIT_TAKEN");
 			int creditGraduate=r.getInt("CREDIT_GRADUATE");
-			int creditAtEnd=r.getInt("CREDIT_TAKING");
+			int creditTaking=r.getInt("CREDIT_TAKING");
 					
-			StudentBean sb = new StudentBean(sid, name, creditTaken, creditGraduate, creditAtEnd); 
+			StudentBean sb = new StudentBean(sid, name, creditTaken, creditGraduate, creditTaking); 
 			
 			rv.put(sid, sb);
 		}
