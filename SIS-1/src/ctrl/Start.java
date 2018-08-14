@@ -103,9 +103,11 @@ public class Start extends HttpServlet {
 			name=request.getParameter("name");
 			creditsTaken=request.getParameter("credits");
 			String f = "export/"+request.getSession().getId()+".xml";
-			//System.out.println(f);
-			String filename = this.getServletContext().getRealPath("/"+f);
+			System.out.println(f);
+			String filename = this.getServletContext().getRealPath("/" + f);
+			System.out.println(filename);
 			request.setAttribute("link", f);
+			request.setAttribute("anchor", filename);
 			
 			try {
 				mod.export(name, creditsTaken, filename);

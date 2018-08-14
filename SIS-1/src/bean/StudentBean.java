@@ -1,11 +1,15 @@
 package bean;
 
+import javax.xml.bind.annotation.XmlType;
+
+@XmlType(propOrder={"sid", "name","credit_taken","credit_graduate"})
 public class StudentBean {
 	private String sid;
 	private String name;
 	private int credit_taken;
 	private int credit_graduate;
 
+	
 	public StudentBean(String sid, String name, int credits_taken, int credit_graduate){
 		this.sid=sid;
 		this.name=name;

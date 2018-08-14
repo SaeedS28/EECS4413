@@ -59,9 +59,11 @@ public class SIS {
 			marshaller.setProperty(javax.xml.bind.Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
 			
 			StringWriter sw = new StringWriter();
-			
 			sw.write("\n");
+			
+			//Code for SIS.xsd
 			marshaller.marshal(lw, new StreamResult(sw));
+			
 			
 			System.out.println(sw.toString());
 			FileWriter fw = new FileWriter(filename);

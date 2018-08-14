@@ -11,7 +11,7 @@
 <title>Generated XML</title>
 </head>
 <body>
-The generated XML can be found at: <a href="${requestScope['link']}">${requestScope['link']}</a>
+The generated XML can be found at: <a href="${requestScope['anchor']}">${requestScope['link']}</a>
 </body>
 </html>
 </jsp:root>

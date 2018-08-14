@@ -11,11 +11,8 @@ import javax.xml.bind.annotation.XmlElement;
 @XmlRootElement(name="sisReport")
 public class ListWrapper {
 	
-	@XmlAttribute
 	private String namePrefix;
-	@XmlAttribute(name = "creditTaken")
 	private String credit_taken;
-	@XmlElement(name="studentList")
 	private List<StudentBean> list;
 	
 	//Default ctor
@@ -27,6 +24,33 @@ public class ListWrapper {
 	public ListWrapper(String namePrefix, String credit_taken, List<StudentBean> list) {
 		this.namePrefix = namePrefix;
 		this.credit_taken = credit_taken;
+		this.list = list;
+	}
+
+	@XmlAttribute
+	public String getNamePrefix() {
+		return namePrefix;
+	}
+
+	public void setNamePrefix(String namePrefix) {
+		this.namePrefix = namePrefix;
+	}
+
+	@XmlAttribute(name="creditTaken")
+	public String getCredit_taken() {
+		return credit_taken;
+	}
+
+	public void setCredit_taken(String credit_taken) {
+		this.credit_taken = credit_taken;
+	}
+
+	@XmlElement(name="studentList")
+	public List<StudentBean> getList() {
+		return list;
+	}
+
+	public void setList(List<StudentBean> list) {
 		this.list = list;
 	}
 
