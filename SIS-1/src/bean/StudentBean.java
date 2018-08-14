@@ -2,19 +2,28 @@ package bean;
 
 import javax.xml.bind.annotation.XmlType;
 
-@XmlType(propOrder={"sid", "name","credit_taken","credit_graduate"})
+@XmlType(propOrder={"sid", "name","credit_taken","credit_graduate","credit_taking"})
 public class StudentBean {
 	private String sid;
 	private String name;
 	private int credit_taken;
 	private int credit_graduate;
-
+	private int credit_taking;
 	
-	public StudentBean(String sid, String name, int credits_taken, int credit_graduate){
+	public StudentBean(String sid, String name, int credits_taken, int credit_graduate, int credit_taking){
 		this.sid=sid;
 		this.name=name;
 		this.credit_taken=credits_taken;
 		this.credit_graduate=credit_graduate;
+		this.credit_taking=credit_taking;
+	}
+
+	public int getCredit_taking() {
+		return credit_taking;
+	}
+
+	public void setCredit_taking(int credit_taking) {
+		this.credit_taking = credit_taking;
 	}
 
 	public String getSid() {

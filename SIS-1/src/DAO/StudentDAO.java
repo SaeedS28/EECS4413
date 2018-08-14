@@ -23,7 +23,10 @@ public class StudentDAO {
 	}
 	
 	public Map<String, StudentBean> retrieve(String namePrefix, int credit_taken) throws SQLException {
-		String query= "select * from students where surname like '%"+ namePrefix  + "%' and credit_taken >="+ credit_taken;
+		String query = String.format("select S.SID, S.GIVENNAME, S.SURNAME, S.CREDIT_TAKEN, S.CREDIT_GRADUATE, E.CREDIT_TAKING"
+				+ " from STUDENTS as S, (select SID, SUM(CREDIT) as CREDIT_TAKING from ENROLLMENT group by SID) as E"
+				+ " where S.SID = E.SID and S.SURNAME like '%%%s%%' and S.CREDIT_TAKEN >= %d", namePrefix, credit_taken);
+
 		Map<String, StudentBean> rv = new HashMap<String, StudentBean>();
 		Connection con= this.ds.getConnection();
 		PreparedStatement p= con.prepareStatement(query);
@@ -34,9 +37,9 @@ public class StudentDAO {
 			String sid = r.getString("SID");
 			int creditTaken= r.getInt("CREDIT_TAKEN");
 			int creditGraduate=r.getInt("CREDIT_GRADUATE");
-			
-			
-			StudentBean sb = new StudentBean(sid, name, creditTaken, creditGraduate); 
+			int creditAtEnd=r.getInt("CREDIT_TAKING");
+					
+			StudentBean sb = new StudentBean(sid, name, creditTaken, creditGraduate, creditAtEnd); 
 			
 			rv.put(sid, sb);
 		}

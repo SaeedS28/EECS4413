@@ -71,10 +71,11 @@ public class Start extends HttpServlet {
 					Iterator<StudentBean> iter = sb.values().iterator();
 					pr.println("<table border='1'>");
 					pr.println("<tr>");
-					pr.println("<th>sid</th>");
-					pr.println("<th>name</th>");
-					pr.println("<th>credits taken</th>");
-					pr.println("<th>credits to graduate</th>");
+					pr.println("<th>Id</th>");
+					pr.println("<th>Name</th>");
+					pr.println("<th>Credits taken</th>");
+					pr.println("<th>Credits to graduate</th>");
+					pr.println("<th>Credits end of term</th>");
 					pr.println("</tr>");
 					
 					while(iter.hasNext()) {
@@ -84,15 +85,15 @@ public class Start extends HttpServlet {
 						pr.print(String.format("<td>%s</td>", student.getName()));
 						pr.print(String.format("<td>%d</td>", student.getCredit_taken()));
 						pr.print(String.format("<td>%d</td>", student.getCredit_graduate()));
-						
+						pr.print(String.format("<td>%d</td>", student.getCredit_taken()+student.getCredit_taking()));
 						pr.println("</tr>");
-						System.out.println(student.getSid());
-						System.out.println(student.getName());
-						System.out.println(student.getCredit_taken());
-						System.out.println(student.getCredit_graduate());
+						System.out.print(student.getSid()+"\t");
+						System.out.print(student.getName()+"\t");
+						System.out.print(student.getCredit_taken()+"\t");
+						System.out.print(student.getCredit_graduate()+"\t");
+						System.out.println(student.getCredit_taken()+student.getCredit_taking());
 					}
 					pr.println("</table>");
-//
 				}
 			} catch(Exception e) {
 				e.printStackTrace();
