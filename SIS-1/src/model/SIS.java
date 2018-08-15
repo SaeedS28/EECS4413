@@ -67,8 +67,8 @@ public class SIS {
 			
 			//Code for SIS.xsd
 			SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
-			Schema schema = sf.newSchema(new File("C:\\Users\\Saad\\Desktop\\EECS4413\\SIS-1\\WebContent\\export\\SIS.xsd"));
-			marshaller.setSchema(schema);
+//			Schema schema = sf.newSchema(new File("C:\\Users\\Saad\\Desktop\\EECS4413\\SIS-1\\WebContent\\export\\SIS.xsd"));
+//			marshaller.setSchema(schema);
 			marshaller.marshal(lw, new StreamResult(sw));
 			
 			System.out.println(sw.toString());
