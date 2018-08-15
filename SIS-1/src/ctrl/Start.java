@@ -16,7 +16,8 @@ import model.*;
 /**
  * Servlet implementation class Start
  */
-@WebServlet("/Start")
+
+@WebServlet(urlPatterns={"/Start","/Startup","/Startup/*","/Start/*"})
 public class Start extends HttpServlet {
 	SIS mod;
 	private static final long serialVersionUID = 1L;
@@ -37,6 +38,12 @@ public class Start extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.getRequestDispatcher("/form.jspx").forward(request, response);
+		if(request.getParameter("p")==null) {
+			System.out.println("No p detected");
+		}
+		else {
+			System.out.println("p detected as: "+request.getParameter("p"));
+		}
 		// prponse.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
