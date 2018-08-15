@@ -3,13 +3,13 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	xmlns:fn="http://java.sun.com/jsp/jstl/functions"
 	xmlns:f="http://java.sun.com/jsp/jstl/fmt" version="2.0">
-	<jsp:directive.page contentType="text/html; charset=UTF-8" 
-		pageEncoding="UTF-8" session="true"/>
+	<jsp:directive.page contentType="text/html; charset=UTF-8"
+		pageEncoding="UTF-8" session="true" />
 	<jsp:output doctype-root-element="html"
 		doctype-public="-//W3C//DTD XHTML 1.0 Transitional//EN"
 		doctype-system="http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"
 		omit-xml-declaration="true" />
-<html xmlns="http://www.w3.org/1999/xhtml">
+	<html xmlns="http://www.w3.org/1999/xhtml">
 
 
 <head>
@@ -19,6 +19,7 @@
 </head>
 <body>
 
+<c:if test = "${p ne 'AddStudent'}">
 	<FORM action="Start" method="post">
 		<FIELDSET>
 			<legend>Student Information System</legend>
@@ -34,6 +35,33 @@
 			<div id="result"></div>
 		</FIELDSET>
 	</FORM>
+	</c:if>
+	
+	<c:if test = "${p eq 'AddStudent'}">
+	<FORM action="Start" method="GET">
+		<FIELDSET>
+			<legend>Student Information System</legend>
+
+			<label for="StudentId">Student Name: </label>
+			 <input id='StudentId' type="text" name="StudentId" />
+			
+			<label for="GivenName">Given Name: </label>
+			<input id='GivenName' type="text" name="GivenName" />
+			
+			<label for="Surname">Surname: </label>
+			<input id='Surname' type="text" name="Surname" />
+			
+			<label for="CreditsTaken">Credits Taken: </label>
+			<input type="number" id='CreditsTaken' name='CreditsTaken' /> 
+			
+			<label for="CreditsToGraduate">Credits to Graduate: </label>
+			<input type="number" id='CreditsToGraduate' name='CreditsToGraduate' /> 
+			
+			<input id='AddStudent' name='AddStudent' type="submit" value="AddStudent" onclick="return validate();" class="reportbutton" />
+			<div id="result"></div>
+		</FIELDSET>
+	</FORM>
+	</c:if>
 </body>
 </html>
 

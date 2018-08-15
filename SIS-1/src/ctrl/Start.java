@@ -20,6 +20,8 @@ import model.*;
 @WebServlet(urlPatterns={"/Start","/Startup","/Startup/*","/Start/*"})
 public class Start extends HttpServlet {
 	SIS mod;
+	String x;
+	String p;
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -30,6 +32,14 @@ public class Start extends HttpServlet {
 		// TODO Auto-generated constructor stub
 	}
 
+	public void init() {
+		try {
+			mod = new SIS();
+		} catch (ClassNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletprponse
 	 *      prponse)
@@ -37,12 +47,48 @@ public class Start extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		request.getRequestDispatcher("/form.jspx").forward(request, response);
-		if(request.getParameter("p")==null) {
-			System.out.println("No p detected");
+		
+		x=request.getParameter("LessThan");
+		p=request.getParameter("p");
+		
+		
+		 if(x!=null){
+			System.out.println("x detected: "+x);
+			Map<String, StudentBean> sb;
+			try {
+				sb = mod.retrieveMinimum(x);
+				Iterator<StudentBean> iter = sb.values().iterator();
+				while (iter.hasNext()) {
+					StudentBean student = iter.next();
+					System.out.print(student.getSid() + "\t");
+					System.out.print(student.getName() + "\t");
+					System.out.print(student.getCredit_taken() + "\t");
+					System.out.print(student.getCredit_graduate() + "\t");
+					System.out.println(student.getCredit_taken() + student.getCredit_taking());
+				}
+				String f = "export/" + request.getSession().getId() + ".xml";
+				System.out.println(f);
+				String filename = this.getServletContext().getRealPath("/" + f);
+				System.out.println(filename);
+				request.setAttribute("link", f);
+				request.setAttribute("anchor", filename);
+				mod.exportCriteria(x, filename);
+				request.getRequestDispatcher("/Done.jspx").forward(request, response);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		else {
-			System.out.println("p detected as: "+request.getParameter("p"));
+			if(p!=null) {
+				System.out.println("p detected as AddStudent");
+				request.setAttribute("p", "AddStudent");
+				request.getRequestDispatcher("/form.jspx").forward(request, response);
+				p=null;
+			}
+			else {
+				request.getRequestDispatcher("/form.jspx").forward(request, response);
+			}
 		}
 		// prponse.getWriter().append("Served at: ").append(request.getContextPath());
 	}
@@ -58,13 +104,6 @@ public class Start extends HttpServlet {
 		String name;
 		String creditsTaken;
 		PrintWriter pr = response.getWriter();
-
-		try {
-			mod = new SIS();
-		} catch (ClassNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 
 		if (buttonPprsed != null) {
 			name = request.getParameter("name");

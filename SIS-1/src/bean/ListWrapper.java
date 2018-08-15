@@ -27,6 +27,12 @@ public class ListWrapper {
 		this.list = list;
 	}
 
+	public ListWrapper(String credit_taken, ArrayList<StudentBean> arrayList) {
+		this.namePrefix = "";
+		this.credit_taken = credit_taken;
+		this.list = arrayList;
+	}
+
 	@XmlAttribute
 	public String getNamePrefix() {
 		return namePrefix;

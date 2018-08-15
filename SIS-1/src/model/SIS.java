@@ -37,7 +37,18 @@ public class SIS {
 		}
 		return null;
 	}
-
+	
+	public Map<String, StudentBean> retrieveMinimum(String credit_taken) throws Exception {
+		int creds=0;
+		try{
+			creds=Integer.parseInt(credit_taken);
+			return sd.retrieveMin(creds);
+		} catch(Exception e){
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 	public Map<String, EnrollmentBean> retriveEnrollment(String namePrefix, String credit_taken) throws Exception {
 		int creds=0;
 		try{
@@ -78,6 +89,36 @@ public class SIS {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+	}
+		
+		public void exportCriteria(String credit_taken, String filename) throws Exception{
+			int credit=0;
 			
+			try {
+				credit=Integer.parseInt(credit_taken);
+				Map<String,StudentBean> sb=sd.retrieveMin(credit);
+				ListWrapper lw=new ListWrapper(credit_taken, new ArrayList<StudentBean>(sb.values()));
+				
+				JAXBContext jc = JAXBContext.newInstance(lw.getClass());
+				javax.xml.bind.Marshaller marshaller=jc.createMarshaller();
+				marshaller.setProperty(javax.xml.bind.Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+				marshaller.setProperty(javax.xml.bind.Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
+				
+				StringWriter sw = new StringWriter();
+				sw.write("\n");
+				
+				//Code for SIS.xsd
+				SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+//				Schema schema = sf.newSchema(new File("C:\\Users\\Saad\\Desktop\\EECS4413\\SIS-1\\WebContent\\export\\SIS.xsd"));
+//				marshaller.setSchema(schema);
+				marshaller.marshal(lw, new StreamResult(sw));
+				
+				System.out.println(sw.toString());
+				FileWriter fw = new FileWriter(filename);
+				fw.write(sw.toString());
+				fw.close();
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
 	}
 }
